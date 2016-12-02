@@ -25,7 +25,7 @@ public class Main extends JavaPlugin {
         registerCommands();
         registerEvents();
 
-
+        getLogger().info("Test 1!");
         getLogger().info("Plugin successfully loaded!");
     }
 
