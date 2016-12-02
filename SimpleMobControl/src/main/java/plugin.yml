@@ -1,0 +1,14 @@
+name: SimpleMobControl
+author: xKev
+version: 0.1
+description: A simple Plugin which is used to enable/disable all kind of mobs in Minecraft.
+
+main: com.xkev.SimpleMobControl.Main
+
+commands:
+  disableMob:
+    description: Disables a specific mob.
+    usage: /disablemob
+  showAvailableMobs:
+    description: Shows all mobs currently available.
+    usage: /showavailablemobs
