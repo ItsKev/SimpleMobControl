@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by kevin on 02.12.2016.
+ * Mob Class with all the available and disabled Mobs.
  */
 public class Mobs {
 

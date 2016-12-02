@@ -1,3 +1,5 @@
+com\xkev\SimpleMobControl\Commands\ShowDisabledMobs.class
+com\xkev\SimpleMobControl\MobConfig\SaveMobConfig.class
 com\xkev\SimpleMobControl\MobConfig\Mobs.class
 com\xkev\SimpleMobControl\Events\CreatureSpawn.class
 com\xkev\SimpleMobControl\Commands\DisableMob.class

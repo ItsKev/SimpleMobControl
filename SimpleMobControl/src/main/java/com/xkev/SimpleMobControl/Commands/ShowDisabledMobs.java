@@ -9,14 +9,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * Command /showavailablemobs shows all available mobs.
+ * Command /showdisabledmobs shows all currently disabled mobs.
  */
-public class ShowAvailableMobs implements CommandExecutor{
+public class ShowDisabledMobs implements CommandExecutor {
 
     private Mobs mobs;
     private JavaPlugin javaPlugin;
 
-    public ShowAvailableMobs(JavaPlugin javaPlugin, Mobs mobs){
+    public ShowDisabledMobs(JavaPlugin javaPlugin, Mobs mobs) {
         this.javaPlugin = javaPlugin;
         this.mobs = mobs;
     }
@@ -28,15 +28,14 @@ public class ShowAvailableMobs implements CommandExecutor{
             player = (Player) commandSender;
         }
 
-        if(player != null){
-            player.sendMessage("Available Mobs:");
-            for(String mob : mobs.getAvailableMobs()){
+        if (player != null) {
+            player.sendMessage("Disabled Mobs:");
+            for (String mob : mobs.getDisabledMobs()) {
                 player.sendMessage(ChatColor.GREEN + mob);
             }
-        }
-        else{
-            javaPlugin.getLogger().info("Available Mobs:");
-            for(String mob : mobs.getAvailableMobs()){
+        } else {
+            javaPlugin.getLogger().info("Disabled Mobs:");
+            for (String mob : mobs.getDisabledMobs()) {
                 javaPlugin.getLogger().info(mob);
             }
         }
