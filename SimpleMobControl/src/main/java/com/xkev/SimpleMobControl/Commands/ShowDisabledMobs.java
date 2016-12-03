@@ -1,7 +1,7 @@
 package com.xkev.SimpleMobControl.Commands;
 
+import com.xkev.SimpleMobControl.Main;
 import com.xkev.SimpleMobControl.MobConfig.Mobs;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,9 +29,9 @@ public class ShowDisabledMobs implements CommandExecutor {
         }
 
         if (player != null) {
-            player.sendMessage("Disabled Mobs:");
+            player.sendMessage(Main.prefix + "Disabled Mobs:");
             for (String mob : mobs.getDisabledMobs()) {
-                player.sendMessage(ChatColor.GREEN + mob);
+                player.sendMessage(Main.prefix + mob);
             }
         } else {
             javaPlugin.getLogger().info("Disabled Mobs:");

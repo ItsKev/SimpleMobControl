@@ -18,6 +18,7 @@ public class Main extends JavaPlugin {
 
 
     private Mobs mobs;
+    public static String prefix = "§a[SimpleMobControl]§f ";
 
     @Override
     public void onEnable() {
@@ -45,10 +46,10 @@ public class Main extends JavaPlugin {
     }
 
     private void registerCommands() {
-        getCommand("disableMob").setExecutor(new DisableMob(mobs));
+        getCommand("disableMob").setExecutor(new DisableMob(this, mobs));
         getCommand("showAvailableMobs").setExecutor(new ShowAvailableMobs(this, mobs));
         getCommand("showDisabledMobs").setExecutor(new ShowDisabledMobs(this, mobs));
-        getCommand("enableMob").setExecutor(new EnableMob(mobs));
+        getCommand("enableMob").setExecutor(new EnableMob(this, mobs));
     }
 
     private void registerEvents() {
