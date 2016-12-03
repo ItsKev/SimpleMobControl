@@ -1,9 +1,9 @@
 # SimpleMobControl Plugin by xKev
-# Version 0.1
+# Version 0.3
 # Write all the mob names you want to disable in here.
-# This list can be configured ingame with the command /disablemob <mob>
+# This list can be configured ingame with the commands /disablemob <mob> and /enablemob <mob>
 # Syntax: - Mobname
+# If you don't want any mobs to be disabled just but [] behind Disabled Mobs.
+# Disabled Mobs: []
 Disabled Mobs:
 - Creeper
-- Spider
-- Sheep

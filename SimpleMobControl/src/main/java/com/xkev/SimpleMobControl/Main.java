@@ -3,6 +3,7 @@ package com.xkev.SimpleMobControl;
 import com.xkev.SimpleMobControl.Commands.DisableMob;
 import com.xkev.SimpleMobControl.Commands.ShowAvailableMobs;
 import com.xkev.SimpleMobControl.Commands.ShowDisabledMobs;
+import com.xkev.SimpleMobControl.Commands.EnableMob;
 import com.xkev.SimpleMobControl.Events.CreatureSpawn;
 import com.xkev.SimpleMobControl.MobConfig.Mobs;
 import com.xkev.SimpleMobControl.MobConfig.ReadMobConfig;
@@ -47,11 +48,11 @@ public class Main extends JavaPlugin {
         getCommand("disableMob").setExecutor(new DisableMob(mobs));
         getCommand("showAvailableMobs").setExecutor(new ShowAvailableMobs(this, mobs));
         getCommand("showDisabledMobs").setExecutor(new ShowDisabledMobs(this, mobs));
+        getCommand("enableMob").setExecutor(new EnableMob(mobs));
     }
 
     private void registerEvents() {
         PluginManager pm = getServer().getPluginManager();
-
-        pm.registerEvents(new CreatureSpawn(this, mobs), this);
+        pm.registerEvents(new CreatureSpawn(mobs), this);
     }
 }

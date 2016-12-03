@@ -11,7 +11,7 @@ public class ReadMobConfig {
 
         plugin.getConfig().options().copyDefaults(true);
         for (String disabledMob : plugin.getConfig().getStringList("Disabled Mobs")) {
-            mobs.addDisabledMobs(disabledMob);
+            mobs.addDisabledMob(disabledMob);
         }
 
         plugin.saveConfig();

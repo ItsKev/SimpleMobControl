@@ -20,10 +20,46 @@ public class Mobs {
         addStandardMobs();
     }
 
-    public void addDisabledMobs(String mob) {
+    /**
+     * Disables a specific mob
+     * @param mob Mob to disable
+     */
+    public void addDisabledMob(String mob) {
         if (availableMobs.contains(mob)) {
-            disabledMobs.add(mob);
+            if(!disabledMobs.contains(mob)){
+                disabledMobs.add(mob);
+            }
         }
+    }
+
+    /**
+     * Enables a specific mob
+     * @param mob Mob to enable
+     */
+    public void removeDisabledMob(String mob){
+        if (availableMobs.contains(mob)) {
+            if(disabledMobs.contains(mob)){
+                disabledMobs.remove(mob);
+            }
+        }
+    }
+
+    /**
+     * Disables all mobs available
+     */
+    public void disableAllMobs(){
+        for(String mob: availableMobs){
+            if(!disabledMobs.contains(mob)){
+                disabledMobs.add(mob);
+            }
+        }
+    }
+
+    /**
+     * Enable all mobs available
+     */
+    public void enableAllMobs(){
+        disabledMobs.clear();
     }
 
     public List<String> getDisabledMobs() {
@@ -40,12 +76,13 @@ public class Mobs {
         availableMobs.add("Bat");
         availableMobs.add("Chicken");
         availableMobs.add("Cow");
-        availableMobs.add("MushroomCow");
+        availableMobs.add("Mooshroom");
         availableMobs.add("Pig");
         availableMobs.add("Rabbit");
         availableMobs.add("Sheep");
         availableMobs.add("SkeletonHorse");
         availableMobs.add("Squid");
+        availableMobs.add("Villager");
 
 
         //Neutral mobs
@@ -53,7 +90,7 @@ public class Mobs {
         availableMobs.add("Enderman");
         availableMobs.add("PolarBear");
         availableMobs.add("Spider");
-        availableMobs.add("PigZombie");
+        availableMobs.add("ZombiePigman");
 
         //Hostile mobs
         availableMobs.add("Blaze");
@@ -88,7 +125,7 @@ public class Mobs {
 
         //Utility mobs
         availableMobs.add("IronGolem");
-        availableMobs.add("SnowMan");
+        availableMobs.add("SnowGolem");
 
         //Boss mobs
         availableMobs.add("EnderDragon");

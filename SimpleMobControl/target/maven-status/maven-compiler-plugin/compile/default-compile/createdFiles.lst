@@ -4,5 +4,6 @@ com\xkev\SimpleMobControl\MobConfig\Mobs.class
 com\xkev\SimpleMobControl\Events\CreatureSpawn.class
 com\xkev\SimpleMobControl\Commands\DisableMob.class
 com\xkev\SimpleMobControl\Commands\ShowAvailableMobs.class
+com\xkev\SimpleMobControl\Commands\EnableMob.class
 com\xkev\SimpleMobControl\Main.class
 com\xkev\SimpleMobControl\MobConfig\ReadMobConfig.class
