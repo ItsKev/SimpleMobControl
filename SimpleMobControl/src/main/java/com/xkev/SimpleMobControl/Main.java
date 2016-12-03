@@ -8,6 +8,7 @@ import com.xkev.SimpleMobControl.Events.CreatureSpawn;
 import com.xkev.SimpleMobControl.MobConfig.Mobs;
 import com.xkev.SimpleMobControl.MobConfig.ReadMobConfig;
 import com.xkev.SimpleMobControl.MobConfig.SaveMobConfig;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,14 +23,14 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        PluginDescriptionFile description = this.getDescription();
 
         this.mobs = new Mobs();
 
         this.readMobConfig();
         this.registerCommands();
         this.registerEvents();
-
-        this.getLogger().info("Plugin successfully loaded!");
+        this.getLogger().info(description.getName() + " successfully enabled!");
     }
 
     @Override
@@ -46,10 +47,10 @@ public class Main extends JavaPlugin {
     }
 
     private void registerCommands() {
-        this.getCommand("disableMob").setExecutor(new DisableMob(this, this.mobs));
-        this.getCommand("showAvailableMobs").setExecutor(new ShowAvailableMobs(this, this.mobs));
-        this.getCommand("showDisabledMobs").setExecutor(new ShowDisabledMobs(this, this.mobs));
-        this.getCommand("enableMob").setExecutor(new EnableMob(this, this.mobs));
+        this.getCommand("DisableMob").setExecutor(new DisableMob(this, this.mobs));
+        this.getCommand("ShowAvailableMobs").setExecutor(new ShowAvailableMobs(this, this.mobs));
+        this.getCommand("ShowDisabledMobs").setExecutor(new ShowDisabledMobs(this, this.mobs));
+        this.getCommand("EnableMob").setExecutor(new EnableMob(this, this.mobs));
     }
 
     private void registerEvents() {
