@@ -31,32 +31,32 @@ public class EnableMob implements CommandExecutor {
 
         if (args.length == 1) {
             if (args[0].equals("all")) {
-                mobs.enableAllMobs();
+                this.mobs.enableAllMobs();
                 new SaveMobConfig(this.javaPlugin, this.mobs);
                 if (player != null) {
                     player.sendMessage(Main.prefix + "Enabled all mobs!");
                 } else {
-                    javaPlugin.getLogger().info("Enabled all mobs!");
+                    this.javaPlugin.getLogger().info("Enabled all mobs!");
                 }
-            } else if (!mobs.getAvailableMobs().contains(args[0])) {
+            } else if (!this.mobs.getAvailableMobs().contains(args[0])) {
                 if (player != null) {
                     player.sendMessage(Main.prefix + "Mob not available! (Case-Sensitive)");
                 } else {
-                    javaPlugin.getLogger().info("Mob not available! (Case-Sensitive)");
+                    this.javaPlugin.getLogger().info("Mob not available! (Case-Sensitive)");
                 }
-            } else if (!mobs.getDisabledMobs().contains(args[0])) {
+            } else if (!this.mobs.getDisabledMobs().contains(args[0])) {
                 if (player != null) {
                     player.sendMessage(Main.prefix + args[0] + " is not disabled!");
                 } else {
-                    javaPlugin.getLogger().info(args[0] + " is not disabled!");
+                    this.javaPlugin.getLogger().info(args[0] + " is not disabled!");
                 }
             } else {
-                mobs.removeDisabledMob(args[0]);
+                this.mobs.removeDisabledMob(args[0]);
                 new SaveMobConfig(this.javaPlugin, this.mobs);
                 if (player != null) {
                     player.sendMessage(Main.prefix + args[0] + " was successfully removed from the list of disabled Mobs!");
                 } else {
-                    javaPlugin.getLogger().info(args[0] + " was successfully removed from the list of disabled Mobs!");
+                    this.javaPlugin.getLogger().info(args[0] + " was successfully removed from the list of disabled Mobs!");
                 }
             }
             return true;

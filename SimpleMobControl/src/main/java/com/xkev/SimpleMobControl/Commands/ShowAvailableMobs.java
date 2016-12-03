@@ -30,14 +30,14 @@ public class ShowAvailableMobs implements CommandExecutor{
 
         if(player != null){
             player.sendMessage(Main.prefix + "Available Mobs:");
-            for(String mob : mobs.getAvailableMobs()){
+            for(String mob : this.mobs.getAvailableMobs()){
                 player.sendMessage(Main.prefix + mob);
             }
         }
         else{
-            javaPlugin.getLogger().info("Available Mobs:");
-            for(String mob : mobs.getAvailableMobs()){
-                javaPlugin.getLogger().info(mob);
+            this.javaPlugin.getLogger().info("Available Mobs:");
+            for(String mob : this.mobs.getAvailableMobs()){
+                this.javaPlugin.getLogger().info(mob);
             }
         }
         return true;

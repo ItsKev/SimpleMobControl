@@ -23,33 +23,33 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        mobs = new Mobs();
+        this.mobs = new Mobs();
 
-        readMobConfig();
-        registerCommands();
-        registerEvents();
+        this.readMobConfig();
+        this.registerCommands();
+        this.registerEvents();
 
-        getLogger().info("Plugin successfully loaded!");
+        this.getLogger().info("Plugin successfully loaded!");
     }
 
     @Override
     public void onDisable() {
-        saveMobConfig();
+        this.saveMobConfig();
     }
 
     private void readMobConfig(){
-        ReadMobConfig mobConfig = new ReadMobConfig(this, mobs);
+        ReadMobConfig mobConfig = new ReadMobConfig(this, this.mobs);
     }
 
     private void saveMobConfig(){
-        SaveMobConfig mobConfig = new SaveMobConfig(this, mobs);
+        SaveMobConfig mobConfig = new SaveMobConfig(this, this.mobs);
     }
 
     private void registerCommands() {
-        getCommand("disableMob").setExecutor(new DisableMob(this, mobs));
-        getCommand("showAvailableMobs").setExecutor(new ShowAvailableMobs(this, mobs));
-        getCommand("showDisabledMobs").setExecutor(new ShowDisabledMobs(this, mobs));
-        getCommand("enableMob").setExecutor(new EnableMob(this, mobs));
+        this.getCommand("disableMob").setExecutor(new DisableMob(this, this.mobs));
+        this.getCommand("showAvailableMobs").setExecutor(new ShowAvailableMobs(this, this.mobs));
+        this.getCommand("showDisabledMobs").setExecutor(new ShowDisabledMobs(this, this.mobs));
+        this.getCommand("enableMob").setExecutor(new EnableMob(this, this.mobs));
     }
 
     private void registerEvents() {

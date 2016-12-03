@@ -30,13 +30,13 @@ public class ShowDisabledMobs implements CommandExecutor {
 
         if (player != null) {
             player.sendMessage(Main.prefix + "Disabled Mobs:");
-            for (String mob : mobs.getDisabledMobs()) {
+            for (String mob : this.mobs.getDisabledMobs()) {
                 player.sendMessage(Main.prefix + mob);
             }
         } else {
             javaPlugin.getLogger().info("Disabled Mobs:");
-            for (String mob : mobs.getDisabledMobs()) {
-                javaPlugin.getLogger().info(mob);
+            for (String mob : this.mobs.getDisabledMobs()) {
+                this.javaPlugin.getLogger().info(mob);
             }
         }
         return true;

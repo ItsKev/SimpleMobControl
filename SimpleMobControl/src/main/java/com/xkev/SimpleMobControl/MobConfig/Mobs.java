@@ -14,8 +14,8 @@ public class Mobs {
 
     public Mobs() {
 
-        availableMobs = new ArrayList<>();
-        disabledMobs = new ArrayList<>();
+        this.availableMobs = new ArrayList<>();
+        this.disabledMobs = new ArrayList<>();
 
         addStandardMobs();
     }
@@ -25,9 +25,9 @@ public class Mobs {
      * @param mob Mob to disable
      */
     public void addDisabledMob(String mob) {
-        if (availableMobs.contains(mob)) {
-            if(!disabledMobs.contains(mob)){
-                disabledMobs.add(mob);
+        if (this.availableMobs.contains(mob)) {
+            if(!this.disabledMobs.contains(mob)){
+                this.disabledMobs.add(mob);
             }
         }
     }
@@ -37,9 +37,9 @@ public class Mobs {
      * @param mob Mob to enable
      */
     public void removeDisabledMob(String mob){
-        if (availableMobs.contains(mob)) {
-            if(disabledMobs.contains(mob)){
-                disabledMobs.remove(mob);
+        if (this.availableMobs.contains(mob)) {
+            if(this.disabledMobs.contains(mob)){
+                this.disabledMobs.remove(mob);
             }
         }
     }
@@ -48,9 +48,9 @@ public class Mobs {
      * Disables all mobs available
      */
     public void disableAllMobs(){
-        for(String mob: availableMobs){
-            if(!disabledMobs.contains(mob)){
-                disabledMobs.add(mob);
+        for(String mob: this.availableMobs){
+            if(!this.disabledMobs.contains(mob)){
+                this.disabledMobs.add(mob);
             }
         }
     }
@@ -59,77 +59,77 @@ public class Mobs {
      * Enable all mobs available
      */
     public void enableAllMobs(){
-        disabledMobs.clear();
+        this.disabledMobs.clear();
     }
 
     public List<String> getDisabledMobs() {
-        return disabledMobs;
+        return this.disabledMobs;
     }
 
     public List<String> getAvailableMobs() {
-        return availableMobs;
+        return this.availableMobs;
     }
 
     private void addStandardMobs() {
 
         //Passive mobs
-        availableMobs.add("Bat");
-        availableMobs.add("Chicken");
-        availableMobs.add("Cow");
-        availableMobs.add("Mooshroom");
-        availableMobs.add("Pig");
-        availableMobs.add("Rabbit");
-        availableMobs.add("Sheep");
-        availableMobs.add("SkeletonHorse");
-        availableMobs.add("Squid");
-        availableMobs.add("Villager");
+        this.availableMobs.add("Bat");
+        this.availableMobs.add("Chicken");
+        this.availableMobs.add("Cow");
+        this.availableMobs.add("Mooshroom");
+        this.availableMobs.add("Pig");
+        this.availableMobs.add("Rabbit");
+        this.availableMobs.add("Sheep");
+        this.availableMobs.add("SkeletonHorse");
+        this.availableMobs.add("Squid");
+        this.availableMobs.add("Villager");
 
 
         //Neutral mobs
-        availableMobs.add("CaveSpider");
-        availableMobs.add("Enderman");
-        availableMobs.add("PolarBear");
-        availableMobs.add("Spider");
-        availableMobs.add("ZombiePigman");
+        this.availableMobs.add("CaveSpider");
+        this.availableMobs.add("Enderman");
+        this.availableMobs.add("PolarBear");
+        this.availableMobs.add("Spider");
+        this.availableMobs.add("ZombiePigman");
 
         //Hostile mobs
-        availableMobs.add("Blaze");
-        availableMobs.add("Creeper");
-        availableMobs.add("ElderGuardian");
-        availableMobs.add("Endermite");
-        availableMobs.add("Evoker");
-        availableMobs.add("Ghast");
-        availableMobs.add("Guardian");
-        availableMobs.add("Husk");
-        availableMobs.add("MagmaCube");
-        availableMobs.add("Shulker");
-        availableMobs.add("Silverfish");
-        availableMobs.add("Skeleton");
-        availableMobs.add("SkeletonHorse");
-        availableMobs.add("Slime");
-        availableMobs.add("Stray");
-        availableMobs.add("Vex");
-        availableMobs.add("Vindicator");
-        availableMobs.add("Witch");
-        availableMobs.add("WitherSkeleton");
-        availableMobs.add("Zombie");
-        availableMobs.add("ZombieVillager");
+        this.availableMobs.add("Blaze");
+        this.availableMobs.add("Creeper");
+        this.availableMobs.add("ElderGuardian");
+        this.availableMobs.add("Endermite");
+        this.availableMobs.add("Evoker");
+        this.availableMobs.add("Ghast");
+        this.availableMobs.add("Guardian");
+        this.availableMobs.add("Husk");
+        this.availableMobs.add("MagmaCube");
+        this.availableMobs.add("Shulker");
+        this.availableMobs.add("Silverfish");
+        this.availableMobs.add("Skeleton");
+        this.availableMobs.add("SkeletonHorse");
+        this.availableMobs.add("Slime");
+        this.availableMobs.add("Stray");
+        this.availableMobs.add("Vex");
+        this.availableMobs.add("Vindicator");
+        this.availableMobs.add("Witch");
+        this.availableMobs.add("WitherSkeleton");
+        this.availableMobs.add("Zombie");
+        this.availableMobs.add("ZombieVillager");
 
         //Tameable mobs
-        availableMobs.add("Donkey");
-        availableMobs.add("Horse");
-        availableMobs.add("Llama");
-        availableMobs.add("Mule");
-        availableMobs.add("Ocelot");
-        availableMobs.add("Wolf");
+        this.availableMobs.add("Donkey");
+        this.availableMobs.add("Horse");
+        this.availableMobs.add("Llama");
+        this.availableMobs.add("Mule");
+        this.availableMobs.add("Ocelot");
+        this.availableMobs.add("Wolf");
 
         //Utility mobs
-        availableMobs.add("IronGolem");
-        availableMobs.add("SnowGolem");
+        this.availableMobs.add("IronGolem");
+        this.availableMobs.add("SnowGolem");
 
         //Boss mobs
-        availableMobs.add("EnderDragon");
-        availableMobs.add("Wither");
+        this.availableMobs.add("EnderDragon");
+        this.availableMobs.add("Wither");
     }
 
 }
