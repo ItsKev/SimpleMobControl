@@ -2,6 +2,7 @@ package com.xkev.SimpleMobControl.Commands;
 
 import com.xkev.SimpleMobControl.Main;
 import com.xkev.SimpleMobControl.MobConfig.Mobs;
+import com.xkev.SimpleMobControl.MobConfig.SaveMobConfig;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -32,6 +33,7 @@ public class DisableMob implements CommandExecutor {
         if (args.length == 1) {
             if (args[0].equals("all")) {
                 mobs.disableAllMobs();
+                new SaveMobConfig(this.javaPlugin, this.mobs);
                 if (player != null) {
                     player.sendMessage(Main.prefix + "Disabled all mobs!");
                 } else {
@@ -51,6 +53,7 @@ public class DisableMob implements CommandExecutor {
                 }
             } else {
                 mobs.addDisabledMob(args[0]);
+                new SaveMobConfig(this.javaPlugin, this.mobs);
                 if (player != null) {
                     player.sendMessage(Main.prefix + args[0] + " was successfully added to the list of disabled Mobs!");
                 } else {
