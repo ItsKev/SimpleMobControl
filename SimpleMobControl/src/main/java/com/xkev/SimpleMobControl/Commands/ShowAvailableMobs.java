@@ -11,12 +11,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 /**
  * Command /showavailablemobs shows all available mobs.
  */
-public class ShowAvailableMobs implements CommandExecutor{
+public class ShowAvailableMobs implements CommandExecutor {
 
     private Mobs mobs;
     private JavaPlugin javaPlugin;
 
-    public ShowAvailableMobs(JavaPlugin javaPlugin, Mobs mobs){
+    public ShowAvailableMobs(JavaPlugin javaPlugin, Mobs mobs) {
         this.javaPlugin = javaPlugin;
         this.mobs = mobs;
     }
@@ -28,15 +28,14 @@ public class ShowAvailableMobs implements CommandExecutor{
             player = (Player) commandSender;
         }
 
-        if(player != null){
+        if (player != null) {
             player.sendMessage(Main.prefix + "Available Mobs:");
-            for(String mob : this.mobs.getAvailableMobs()){
+            for (String mob : this.mobs.getAvailableMobs()) {
                 player.sendMessage(Main.prefix + mob);
             }
-        }
-        else{
+        } else {
             this.javaPlugin.getLogger().info("Available Mobs:");
-            for(String mob : this.mobs.getAvailableMobs()){
+            for (String mob : this.mobs.getAvailableMobs()) {
                 this.javaPlugin.getLogger().info(mob);
             }
         }

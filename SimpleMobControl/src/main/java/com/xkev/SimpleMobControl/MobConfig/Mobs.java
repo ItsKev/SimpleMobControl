@@ -1,72 +1,67 @@
 package com.xkev.SimpleMobControl.MobConfig;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 /**
  * Mob Class with all the available and disabled Mobs.
  */
 public class Mobs {
 
-    private List<String> availableMobs;
-    private List<String> disabledMobs;
+    private HashSet<String> availableMobs;
+    private HashSet<String> disabledMobs;
 
     public Mobs() {
 
-        this.availableMobs = new ArrayList<>();
-        this.disabledMobs = new ArrayList<>();
+        this.availableMobs = new HashSet<>();
+        this.disabledMobs = new HashSet<>();
 
         addStandardMobs();
     }
 
     /**
      * Disables a specific mob
+     *
      * @param mob Mob to disable
      */
     public void addDisabledMob(String mob) {
         if (this.availableMobs.contains(mob)) {
-            if(!this.disabledMobs.contains(mob)){
-                this.disabledMobs.add(mob);
-            }
+            this.disabledMobs.add(mob);
         }
     }
 
     /**
      * Enables a specific mob
+     *
      * @param mob Mob to enable
      */
-    public void removeDisabledMob(String mob){
+    public void removeDisabledMob(String mob) {
         if (this.availableMobs.contains(mob)) {
-            if(this.disabledMobs.contains(mob)){
-                this.disabledMobs.remove(mob);
-            }
+            this.disabledMobs.remove(mob);
         }
     }
 
     /**
      * Disables all mobs available
      */
-    public void disableAllMobs(){
-        for(String mob: this.availableMobs){
-            if(!this.disabledMobs.contains(mob)){
-                this.disabledMobs.add(mob);
-            }
+    public void disableAllMobs() {
+        for (String mob : this.availableMobs) {
+            this.disabledMobs.add(mob);
         }
     }
 
     /**
      * Enable all mobs available
      */
-    public void enableAllMobs(){
+    public void enableAllMobs() {
         this.disabledMobs.clear();
     }
 
-    public List<String> getDisabledMobs() {
+    public HashSet<String> getDisabledMobs() {
         return this.disabledMobs;
     }
 
-    public List<String> getAvailableMobs() {
+    public HashSet<String> getAvailableMobs() {
         return this.availableMobs;
     }
 
