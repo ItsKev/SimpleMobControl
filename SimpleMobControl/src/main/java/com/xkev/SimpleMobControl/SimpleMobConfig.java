@@ -13,9 +13,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * Main Method
+ * SimpleMobConfig Method
  */
-public class Main extends JavaPlugin {
+public class SimpleMobConfig extends JavaPlugin {
 
 
     private Mobs mobs;
@@ -23,14 +23,11 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        PluginDescriptionFile description = this.getDescription();
-
         this.mobs = new Mobs();
 
         this.readMobConfig();
         this.registerCommands();
         this.registerEvents();
-        this.getLogger().info(description.getName() + " successfully enabled!");
     }
 
     @Override

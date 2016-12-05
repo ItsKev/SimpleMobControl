@@ -1,6 +1,6 @@
 package com.xkev.SimpleMobControl.Commands;
 
-import com.xkev.SimpleMobControl.Main;
+import com.xkev.SimpleMobControl.SimpleMobConfig;
 import com.xkev.SimpleMobControl.MobConfig.Mobs;
 import com.xkev.SimpleMobControl.MobConfig.SaveMobConfig;
 import org.bukkit.command.Command;
@@ -35,19 +35,19 @@ public class DisableMob implements CommandExecutor {
                 this.mobs.disableAllMobs();
                 new SaveMobConfig(this.javaPlugin, this.mobs);
                 if (player != null) {
-                    player.sendMessage(Main.prefix + "Disabled all mobs!");
+                    player.sendMessage(SimpleMobConfig.prefix + "Disabled all mobs!");
                 } else {
                     this.javaPlugin.getLogger().info("Disabled all mobs!");
                 }
             } else if (!this.mobs.getAvailableMobs().contains(args[0])) {
                 if (player != null) {
-                    player.sendMessage(Main.prefix + "Mob not available! (Case-Sensitive)");
+                    player.sendMessage(SimpleMobConfig.prefix + "Mob not available! (Case-Sensitive)");
                 } else {
                     this.javaPlugin.getLogger().info("Mob not available! (Case-Sensitive)");
                 }
             } else if (this.mobs.getDisabledMobs().contains(args[0])) {
                 if (player != null) {
-                    player.sendMessage(Main.prefix + args[0] + " is already disabled!");
+                    player.sendMessage(SimpleMobConfig.prefix + args[0] + " is already disabled!");
                 } else {
                     this.javaPlugin.getLogger().info(args[0] + " is already disabled!");
                 }
@@ -55,7 +55,7 @@ public class DisableMob implements CommandExecutor {
                 this.mobs.addDisabledMob(args[0]);
                 new SaveMobConfig(this.javaPlugin, this.mobs);
                 if (player != null) {
-                    player.sendMessage(Main.prefix + args[0] + " was successfully added to the list of disabled Mobs!");
+                    player.sendMessage(SimpleMobConfig.prefix + args[0] + " was successfully added to the list of disabled Mobs!");
                 } else {
                     this.javaPlugin.getLogger().info(args[0] + " was successfully added to the list of disabled Mobs!");
                 }

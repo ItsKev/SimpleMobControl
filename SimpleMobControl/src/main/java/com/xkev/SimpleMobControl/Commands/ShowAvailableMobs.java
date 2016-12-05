@@ -1,6 +1,6 @@
 package com.xkev.SimpleMobControl.Commands;
 
-import com.xkev.SimpleMobControl.Main;
+import com.xkev.SimpleMobControl.SimpleMobConfig;
 import com.xkev.SimpleMobControl.MobConfig.Mobs;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -29,9 +29,9 @@ public class ShowAvailableMobs implements CommandExecutor {
         }
 
         if (player != null) {
-            player.sendMessage(Main.prefix + "Available Mobs:");
+            player.sendMessage(SimpleMobConfig.prefix + "Available Mobs:");
             for (String mob : this.mobs.getAvailableMobs()) {
-                player.sendMessage(Main.prefix + mob);
+                player.sendMessage(SimpleMobConfig.prefix + mob);
             }
         } else {
             this.javaPlugin.getLogger().info("Available Mobs:");
