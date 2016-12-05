@@ -1,9 +1,6 @@
 package com.xkev.SimpleMobControl;
 
-import com.xkev.SimpleMobControl.Commands.DisableMob;
-import com.xkev.SimpleMobControl.Commands.ShowAvailableMobs;
-import com.xkev.SimpleMobControl.Commands.ShowDisabledMobs;
-import com.xkev.SimpleMobControl.Commands.EnableMob;
+import com.xkev.SimpleMobControl.Commands.*;
 import com.xkev.SimpleMobControl.Events.CreatureSpawn;
 import com.xkev.SimpleMobControl.MobConfig.Mobs;
 import com.xkev.SimpleMobControl.MobConfig.ReadMobConfig;
@@ -13,9 +10,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * SimpleMobConfig Method
+ * SimpleMobControl Method
  */
-public class SimpleMobConfig extends JavaPlugin {
+public class SimpleMobControl extends JavaPlugin {
 
 
     private Mobs mobs;
@@ -44,10 +41,7 @@ public class SimpleMobConfig extends JavaPlugin {
     }
 
     private void registerCommands() {
-        this.getCommand("DisableMob").setExecutor(new DisableMob(this, this.mobs));
-        this.getCommand("ShowAvailableMobs").setExecutor(new ShowAvailableMobs(this, this.mobs));
-        this.getCommand("ShowDisabledMobs").setExecutor(new ShowDisabledMobs(this, this.mobs));
-        this.getCommand("EnableMob").setExecutor(new EnableMob(this, this.mobs));
+        this.getCommand("SimpleMobControl").setExecutor(new SimpleMobCommands(this, this.mobs));
     }
 
     private void registerEvents() {
