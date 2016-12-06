@@ -5,7 +5,6 @@ import com.xkev.SimpleMobControl.Events.CreatureSpawn;
 import com.xkev.SimpleMobControl.MobConfig.Mobs;
 import com.xkev.SimpleMobControl.MobConfig.ReadMobConfig;
 import com.xkev.SimpleMobControl.MobConfig.SaveMobConfig;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 

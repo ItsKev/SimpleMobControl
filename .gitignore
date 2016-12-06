@@ -1,1 +1,9 @@
+# Intellij
+SimpleMobControl/.idea/
+*.iml
+*.iws
+
+# Maven
+SimpleMobControl/log/
 SimpleMobControl/target/
+

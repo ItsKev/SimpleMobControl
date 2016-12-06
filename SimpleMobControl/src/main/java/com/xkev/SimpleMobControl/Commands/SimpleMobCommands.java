@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * Created by kevin on 05.12.2016.
+ * Simple Mob Control Commands class, all in one now. /simplemobcontrol to show help
  */
 public class SimpleMobCommands implements CommandExecutor {
 
