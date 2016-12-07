@@ -3,6 +3,8 @@ package com.xkev.SimpleMobControl.MobConfig;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 /**
@@ -12,7 +14,10 @@ public class SaveMobConfig {
 
     public SaveMobConfig(JavaPlugin javaPlugin, Mobs mobs) {
 
-        javaPlugin.getConfig().set("Disabled Mobs", new ArrayList<>(mobs.getDisabledMobs()));
+        List<String> disabledMobs = new ArrayList<>(mobs.getDisabledMobs());
+        Collections.sort(disabledMobs);
+
+        javaPlugin.getConfig().set("Disabled Mobs", disabledMobs);
         javaPlugin.saveConfig();
     }
 }

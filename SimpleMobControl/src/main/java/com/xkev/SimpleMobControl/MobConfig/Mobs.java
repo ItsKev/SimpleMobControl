@@ -1,20 +1,20 @@
 package com.xkev.SimpleMobControl.MobConfig;
 
-
-import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Mob Class with all the available and disabled Mobs.
  */
 public class Mobs {
 
-    private HashSet<String> availableMobs;
-    private HashSet<String> disabledMobs;
+    private Set<String> availableMobs;
+    private Set<String> disabledMobs;
 
     public Mobs() {
 
-        this.availableMobs = new HashSet<>();
-        this.disabledMobs = new HashSet<>();
+        this.availableMobs = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        this.disabledMobs = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
         addStandardMobs();
     }
@@ -57,11 +57,11 @@ public class Mobs {
         this.disabledMobs.clear();
     }
 
-    public HashSet<String> getDisabledMobs() {
+    public Set<String> getDisabledMobs() {
         return this.disabledMobs;
     }
 
-    public HashSet<String> getAvailableMobs() {
+    public Set<String> getAvailableMobs() {
         return this.availableMobs;
     }
 

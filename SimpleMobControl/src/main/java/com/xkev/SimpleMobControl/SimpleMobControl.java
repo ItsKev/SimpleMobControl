@@ -41,6 +41,7 @@ public class SimpleMobControl extends JavaPlugin {
 
     private void registerCommands() {
         this.getCommand("SimpleMobControl").setExecutor(new SimpleMobCommands(this, this.mobs));
+        this.getCommand("SimpleMobControl").setTabCompleter(new SimpleMobCommands(this, this.mobs));
     }
 
     private void registerEvents() {
