@@ -131,6 +131,7 @@ public class SimpleMobCommands implements CommandExecutor, TabCompleter {
 
         if (commandSender.hasPermission("simplemobcontrol.info")) {
             sendMessage(commandSender, "------------ Simple Mob Control Help ------------");
+            sendMessage(commandSender, "Alias: /smc");
             sendMessage(commandSender, "/simplemobcontrol disabledMobs - Shows disabled mobs");
         }
         if (commandSender.hasPermission("simplemobcontrol.configure")) {
