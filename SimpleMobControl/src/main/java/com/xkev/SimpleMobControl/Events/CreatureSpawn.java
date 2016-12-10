@@ -1,6 +1,7 @@
 package com.xkev.SimpleMobControl.Events;
 
 import com.xkev.SimpleMobControl.MobConfig.Mobs;
+import com.xkev.SimpleMobControl.SimpleMobControl;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -10,17 +11,21 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
  */
 public class CreatureSpawn implements Listener {
 
-    private final Mobs mobs;
+    private final SimpleMobControl plugin;
 
-    public CreatureSpawn(Mobs mobs) {
-        this.mobs = mobs;
+    public CreatureSpawn(SimpleMobControl plugin) {
+        this.plugin = plugin;
     }
 
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent event) {
 
-        if (this.mobs.getDisabledMobs().contains(event.getEntity().getName().replaceAll("\\s+",""))) {
-            event.setCancelled(true);
+        String world = event.getLocation().getWorld().getName();
+        Mobs mobs = this.plugin.getWorlds().get(world);
+        if(mobs != null) {
+            if (mobs.getDisabledMobs().contains(event.getEntity().getName().replaceAll("\\s+", ""))) {
+                event.setCancelled(true);
+            }
         }
     }
 }

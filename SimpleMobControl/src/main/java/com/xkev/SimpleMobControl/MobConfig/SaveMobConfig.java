@@ -1,10 +1,11 @@
 package com.xkev.SimpleMobControl.MobConfig;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import com.xkev.SimpleMobControl.SimpleMobControl;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -12,12 +13,15 @@ import java.util.List;
  */
 public class SaveMobConfig {
 
-    public SaveMobConfig(JavaPlugin javaPlugin, Mobs mobs) {
+    public SaveMobConfig(SimpleMobControl javaPlugin) {
 
-        List<String> disabledMobs = new ArrayList<>(mobs.getDisabledMobs());
-        Collections.sort(disabledMobs);
+        for(Map.Entry<String, Mobs> world : javaPlugin.getWorlds().entrySet()){
+            List<String> disabledMobs = new ArrayList<>(world.getValue().getDisabledMobs());
+            Collections.sort(disabledMobs);
 
-        javaPlugin.getConfig().set("Disabled Mobs", disabledMobs);
-        javaPlugin.saveConfig();
+            javaPlugin.getConfig().set(world.getKey() + ".Disabled Mobs", disabledMobs);
+            javaPlugin.saveConfig();
+        }
+
     }
 }
