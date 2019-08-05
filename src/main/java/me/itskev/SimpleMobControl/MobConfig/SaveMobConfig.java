@@ -1,6 +1,6 @@
-package com.xkev.SimpleMobControl.MobConfig;
+package me.itskev.SimpleMobControl.MobConfig;
 
-import com.xkev.SimpleMobControl.SimpleMobControl;
+import me.itskev.SimpleMobControl.SimpleMobControl;
 
 import java.util.ArrayList;
 import java.util.Collections;

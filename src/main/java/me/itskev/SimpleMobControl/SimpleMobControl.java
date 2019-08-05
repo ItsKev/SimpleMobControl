@@ -1,10 +1,11 @@
-package com.xkev.SimpleMobControl;
+package me.itskev.SimpleMobControl;
 
-import com.xkev.SimpleMobControl.Commands.*;
-import com.xkev.SimpleMobControl.Events.CreatureSpawn;
-import com.xkev.SimpleMobControl.MobConfig.Mobs;
-import com.xkev.SimpleMobControl.MobConfig.ReadMobConfig;
-import com.xkev.SimpleMobControl.MobConfig.SaveMobConfig;
+import me.itskev.SimpleMobControl.Commands.*;
+import me.itskev.SimpleMobControl.Events.CreatureSpawn;
+import me.itskev.SimpleMobControl.MobConfig.Mobs;
+import me.itskev.SimpleMobControl.MobConfig.ReadMobConfig;
+import me.itskev.SimpleMobControl.MobConfig.SaveMobConfig;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,14 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * SimpleMobControl Method
- */
 public class SimpleMobControl extends JavaPlugin {
 
 
     private Map<String, Mobs> worlds;
-    public static String prefix = "§a[SimpleMobControl]§f ";
+    public static String prefix = ChatColor.GREEN + "[SimpleMobControl] " + ChatColor.WHITE;
 
     @Override
     public void onEnable() {
@@ -46,11 +44,11 @@ public class SimpleMobControl extends JavaPlugin {
     }
 
     private void readMobConfig(){
-        ReadMobConfig mobConfig = new ReadMobConfig(this);
+        new ReadMobConfig(this);
     }
 
     private void saveMobConfig(){
-        SaveMobConfig mobConfig = new SaveMobConfig(this);
+        new SaveMobConfig(this);
     }
 
     private void registerCommands() {

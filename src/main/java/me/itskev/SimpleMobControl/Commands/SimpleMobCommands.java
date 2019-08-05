@@ -1,15 +1,19 @@
-package com.xkev.SimpleMobControl.Commands;
+package me.itskev.SimpleMobControl.Commands;
 
-import com.xkev.SimpleMobControl.MobConfig.Mobs;
-import com.xkev.SimpleMobControl.MobConfig.SaveMobConfig;
-import com.xkev.SimpleMobControl.SimpleMobControl;
+import me.itskev.SimpleMobControl.MobConfig.Mobs;
+import me.itskev.SimpleMobControl.MobConfig.SaveMobConfig;
+import me.itskev.SimpleMobControl.SimpleMobControl;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Simple Mob Control Commands class, all in one now. /simplemobcontrol to show help
@@ -41,8 +45,7 @@ public class SimpleMobCommands implements CommandExecutor, TabCompleter {
         //Show help
         if (args.length == 0) {
             showHelp(commandSender);
-        }
-        else if (world != "") {
+        } else if (!world.equals("")) {
             if (args[0].equalsIgnoreCase("disabledMobs") && commandSender.hasPermission("simplemobcontrol.info")) {
                 showDisabledMobs(commandSender, world);
             } else if (commandSender.hasPermission("simplemobcontrol.configure")) {
@@ -53,7 +56,7 @@ public class SimpleMobCommands implements CommandExecutor, TabCompleter {
                 } else if (args[0].equalsIgnoreCase("enableAll")) {
                     enableAllMobs(commandSender, world);
                 } else if (args[0].equalsIgnoreCase("disable")) {
-                    if (!this.plugin.getWorlds().get(world).getAvailableMobs().contains(args[1])) {
+                    if (args.length < 2 || !this.plugin.getWorlds().get(world).getAvailableMobs().contains(args[1])) {
                         sendMessage(commandSender, "Mob not available!");
                     } else if (this.plugin.getWorlds().get(world).getDisabledMobs().contains(args[1])) {
                         sendMessage(commandSender, args[1] + " is already disabled!");
@@ -84,7 +87,6 @@ public class SimpleMobCommands implements CommandExecutor, TabCompleter {
         return true;
     }
 
-    // Tab completion
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String label, String[] args) {
 
@@ -124,7 +126,6 @@ public class SimpleMobCommands implements CommandExecutor, TabCompleter {
         return null;
     }
 
-    //Detects if the commandSender is a player or not and sends the message differently afterwards
     private void sendMessage(CommandSender commandSender, String message) {
         Player player = null;
         if (commandSender instanceof Player) {
@@ -134,23 +135,23 @@ public class SimpleMobCommands implements CommandExecutor, TabCompleter {
         if (player != null) {
             player.sendMessage(SimpleMobControl.prefix + message);
         } else {
-            plugin.getLogger().info(message);
+            plugin.getServer().getConsoleSender().sendMessage(SimpleMobControl.prefix + message);
         }
     }
 
     private void showHelp(CommandSender commandSender) {
 
         if (commandSender.hasPermission("simplemobcontrol.info")) {
-            sendMessage(commandSender, "------------ Simple Mob Control Help ------------");
+            sendMessage(commandSender, "Simple Mob Control Help");
             sendMessage(commandSender, "Alias: /smc");
             sendMessage(commandSender, "/simplemobcontrol disabledMobs - Shows disabled mobs");
         }
         if (commandSender.hasPermission("simplemobcontrol.configure")) {
             sendMessage(commandSender, "/simplemobcontrol availableMobs - Shows available mobs");
-            sendMessage(commandSender, "/simplemobcontrol disableAll - Disables all mobs");
-            sendMessage(commandSender, "/simplemobcontrol disable [mobName] - Disables a specific mob");
-            sendMessage(commandSender, "/simplemobcontrol enableAll - Enables all mobs");
-            sendMessage(commandSender, "/simplemobcontrol enable [mobName] - Enables a specific mob");
+            sendMessage(commandSender, "/simplemobcontrol disableAll " + ChatColor.YELLOW + "[worldname]" + ChatColor.WHITE + " - Disables all mobs");
+            sendMessage(commandSender, "/simplemobcontrol disable [mobName] " + ChatColor.YELLOW + "[worldname]" + ChatColor.WHITE + " - Disables a specific mob");
+            sendMessage(commandSender, "/simplemobcontrol enableAll " + ChatColor.YELLOW + "[worldname]" + ChatColor.WHITE + " - Enables all mobs");
+            sendMessage(commandSender, "/simplemobcontrol enable [mobName] " + ChatColor.YELLOW + "[worldname]" + ChatColor.WHITE + " - Enables a specific mob");
         }
     }
 

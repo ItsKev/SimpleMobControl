@@ -1,0 +1,7 @@
+# SimpleMobControl Plugin by xKev
+# Version 1.0.0
+# Write all the mob names you want to disable in here.
+# This list can be configured in-game with the commands /smc disable <mob> and /smc enable <mob>
+# Syntax: - Mobname
+# If you don't want any mobs to be disabled just put [] behind Disabled Mobs.
+# Disabled Mobs: []

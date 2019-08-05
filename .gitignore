@@ -1,9 +1,14 @@
-# Intellij
-SimpleMobControl/.idea/
+/build.xml
+/target
+
+# various other potential build files
+/build
+/bin
+/dist
+/manifest.mf
+
+# intellij
 *.iml
+*.ipr
 *.iws
-
-# Maven
-SimpleMobControl/log/
-SimpleMobControl/target/
-
+.idea/
