@@ -1,6 +1,6 @@
-package io.github.itskev.simplemobcontrol.mobconfig;
+package io.github.itskev.simplemobcontrol.config;
 
-import io.github.itskev.simplemobcontrol.SimpleMobControl;
+import org.bukkit.plugin.Plugin;
 
 import java.util.Map;
 
@@ -9,15 +9,13 @@ import java.util.Map;
  */
 public class ReadMobConfig {
 
-  public ReadMobConfig(SimpleMobControl plugin) {
-
+  public ReadMobConfig(final Plugin plugin, final MobsService mobsService) {
     plugin.getConfig().options().copyDefaults(true);
-    for (Map.Entry<String, Mobs> world : plugin.getWorlds().entrySet()) {
+    for (Map.Entry<String, Mobs> world : mobsService.getWorlds().entrySet()) {
       for (String disabledMob : plugin.getConfig().getStringList(world.getKey() + ".Disabled Mobs")) {
         world.getValue().addDisabledMob(disabledMob);
       }
     }
     plugin.saveConfig();
   }
-
 }

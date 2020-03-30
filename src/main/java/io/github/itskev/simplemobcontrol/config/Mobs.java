@@ -1,5 +1,6 @@
-package io.github.itskev.simplemobcontrol.mobconfig;
+package io.github.itskev.simplemobcontrol.config;
 
+import lombok.Getter;
 import org.bukkit.entity.EntityType;
 
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 /**
  * Mob Class with all the available and disabled Mobs.
  */
+@Getter
 public class Mobs {
 
   private Set<String> availableMobs;
@@ -44,14 +46,6 @@ public class Mobs {
     this.disabledMobs.clear();
   }
 
-  public Set<String> getDisabledMobs() {
-    return this.disabledMobs;
-  }
-
-  public Set<String> getAvailableMobs() {
-    return this.availableMobs;
-  }
-
   private void addStandardMobs() {
     List<EntityType> monsters = Arrays.stream(EntityType.values())
         .filter(entityType -> entityType.isSpawnable() && entityType.isAlive())
@@ -59,5 +53,4 @@ public class Mobs {
         .collect(Collectors.toList());
     monsters.forEach(entityType -> availableMobs.add(entityType.name()));
   }
-
 }
