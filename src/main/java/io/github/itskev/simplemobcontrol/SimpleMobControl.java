@@ -4,6 +4,7 @@ import io.github.itskev.simplemobcontrol.commands.SimpleMobCommands;
 import io.github.itskev.simplemobcontrol.config.MobsService;
 import io.github.itskev.simplemobcontrol.config.ReadMobConfig;
 import io.github.itskev.simplemobcontrol.config.SaveMobConfig;
+import io.github.itskev.simplemobcontrol.gui.GUIService;
 import io.github.itskev.simplemobcontrol.listener.CreatureListener;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
@@ -24,8 +25,9 @@ public class SimpleMobControl extends JavaPlugin {
   }
 
   private void registerCommands(final MobsService mobsService) {
-    getCommand("SimpleMobControl").setExecutor(new SimpleMobCommands(this, mobsService));
-    getCommand("SimpleMobControl").setTabCompleter(new SimpleMobCommands(this, mobsService));
+    GUIService guiService = new GUIService(this, mobsService);
+    getCommand("SimpleMobControl").setExecutor(new SimpleMobCommands(this, mobsService, guiService));
+    getCommand("SimpleMobControl").setTabCompleter(new SimpleMobCommands(this, mobsService, guiService));
   }
 
   private void registerEvents(final MobsService mobsService) {

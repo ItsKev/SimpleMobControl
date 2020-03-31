@@ -5,6 +5,7 @@ import io.github.itskev.simplemobcontrol.commands.subcommands.EnableCommand;
 import io.github.itskev.simplemobcontrol.commands.subcommands.InfoCommands;
 import io.github.itskev.simplemobcontrol.config.Mobs;
 import io.github.itskev.simplemobcontrol.config.MobsService;
+import io.github.itskev.simplemobcontrol.gui.GUIService;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,15 +28,17 @@ import static io.github.itskev.simplemobcontrol.util.MessageUtil.sendMessage;
  */
 public class SimpleMobCommands implements CommandExecutor, TabCompleter {
 
-  private static String[] commands = {"disabledMobs", "availableMobs", "disable", "disableAll", "enable", "enableAll"};
+  private static String[] commands = {"help", "disabledMobs", "availableMobs", "disable", "disableAll", "enable", "enableAll"};
 
   private final MobsService mobsService;
+  private final GUIService guiService;
   private final InfoCommands infoCommands;
   private final EnableCommand enableCommand;
   private final DisableCommand disableCommand;
 
-  public SimpleMobCommands(final Plugin plugin, final MobsService mobsService) {
+  public SimpleMobCommands(final Plugin plugin, final MobsService mobsService, final GUIService guiService) {
     this.mobsService = mobsService;
+    this.guiService = guiService;
     infoCommands = new InfoCommands(plugin, mobsService);
     enableCommand = new EnableCommand(plugin, mobsService);
     disableCommand = new DisableCommand(plugin, mobsService);
@@ -56,8 +59,16 @@ public class SimpleMobCommands implements CommandExecutor, TabCompleter {
     }
 
     if (args.length == 0) {
-      infoCommands.showHelp(sender);
+      if (player != null) {
+        guiService.createAvailableMobsGUI(player, world).openInventory(player);
+      } else {
+        infoCommands.showHelp(sender);
+      }
       return true;
+    }
+
+    if (args[0].equalsIgnoreCase("help")) {
+      infoCommands.showHelp(sender);
     }
 
     if (world.equals("")) {
