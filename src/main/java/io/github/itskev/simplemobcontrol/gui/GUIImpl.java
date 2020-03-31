@@ -36,7 +36,7 @@ public class GUIImpl implements GUI {
 
   @Override
   public void nextPage() {
-    int pages = (int) Math.ceil(slots.size() / (float) (inventory.getSize() - 9));
+    int pages = (int) Math.ceil(slots.size() / (float) (inventory.getSize() - 18));
     if (currentPage + 1 < pages) {
       currentPage++;
     }
@@ -51,7 +51,7 @@ public class GUIImpl implements GUI {
   @Override
   public void fillBarWith(final ItemStack item) {
     List<Integer> slotsToFill = new ArrayList<>();
-    for (int i = inventory.getSize() - 10; i < inventory.getSize(); i++) {
+    for (int i = inventory.getSize() - 18; i < inventory.getSize(); i++) {
       slotsToFill.add(i);
     }
 
@@ -94,7 +94,7 @@ public class GUIImpl implements GUI {
   public void refillSlots() {
     List<Integer> availableSlots = new ArrayList<>();
     int rows = inventory.getSize() / 9;
-    for (int i = 0; i < rows - 1; i++) {
+    for (int i = 0; i < rows - 2; i++) {
       for (int j = 0; j < 9; j++) {
         availableSlots.add(i * 9 + j);
       }

@@ -29,13 +29,24 @@ public class GUIService {
   private final MobsService mobsService;
 
   public GUI createAvailableMobsGUI(final Player player, final String world) {
-    Inventory inventory = Bukkit.createInventory(null, 36, ChatColor.DARK_GREEN + "SMC - World " + world);
+    Inventory inventory = Bukkit.createInventory(null, 45, ChatColor.DARK_GREEN + "SMC - " + world);
     GUIImpl gui = new GUIImpl(inventory, plugin);
     gui.fillBarWith(createItem(Material.BLACK_STAINED_GLASS_PANE, ChatColor.GOLD + ""));
 
-    setupSlots(player, gui, world);
+    setupAvailableMobsSlots(player, gui, world);
 
-    gui.addClickable(createItem(Material.GRASS_BLOCK, ChatColor.GREEN + "Change world"), 27, () -> {
+    gui.addClickable(createItem(Material.RED_WOOL, ChatColor.RED + "Disable all mobs"), 30, () -> {
+      mobsService.getWorlds().get(world).disableAllMobs();
+      setupAvailableMobsSlots(player, gui, world);
+      gui.refillSlots();
+    });
+    gui.addClickable(createItem(Material.GREEN_WOOL, ChatColor.GREEN + "Enable all mobs"), 32, () -> {
+      mobsService.getWorlds().get(world).enableAllMobs();
+      setupAvailableMobsSlots(player, gui, world);
+      gui.refillSlots();
+    });
+
+    gui.addClickable(createItem(Material.GRASS_BLOCK, ChatColor.GREEN + "Change world"), 36, () -> {
       List<String> worlds = mobsService.getWorlds().keySet().stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
       int indexOf = worlds.indexOf(world) + 1;
       if (indexOf >= worlds.size()) {
@@ -43,13 +54,49 @@ public class GUIService {
       }
       createAvailableMobsGUI(player, worlds.get(indexOf)).openInventory(player);
     });
-    gui.addClickable(createItem(Material.ARROW, ChatColor.BLUE + "Previous"), 29, gui::previousPage);
-    gui.addClickable(createItem(Material.ARROW, ChatColor.BLUE + "Next"), 33, gui::nextPage);
-    gui.addClickable(createItem(Material.BARRIER, ChatColor.RED + "Close"), 35, player::closeInventory);
+    gui.addClickable(createItem(Material.ARROW, ChatColor.BLUE + "Previous"), 38, gui::previousPage);
+    gui.addClickable(createItem(Material.NETHER_STAR, ChatColor.RED + "Disabled Mobs"), 40, () ->
+        createDisabledMobsGUI(player, world).openInventory(player));
+    gui.addClickable(createItem(Material.ARROW, ChatColor.BLUE + "Next"), 42, gui::nextPage);
+    gui.addClickable(createItem(Material.BARRIER, ChatColor.RED + "Close"), 44, player::closeInventory);
     return gui;
   }
 
-  private void setupSlots(final Player player, final GUI gui, final String world) {
+  public GUI createDisabledMobsGUI(final Player player, final String world) {
+    Inventory inventory = Bukkit.createInventory(null, 45, ChatColor.DARK_GREEN + "Disabled Mobs - " + world);
+    GUIImpl gui = new GUIImpl(inventory, plugin);
+    gui.fillBarWith(createItem(Material.BLACK_STAINED_GLASS_PANE, ChatColor.GOLD + ""));
+
+    setupDisabledMobsSlots(player, gui, world);
+
+    gui.addClickable(createItem(Material.RED_WOOL, ChatColor.RED + "Disable all mobs"), 30, () -> {
+      mobsService.getWorlds().get(world).disableAllMobs();
+      setupDisabledMobsSlots(player, gui, world);
+      gui.refillSlots();
+    });
+    gui.addClickable(createItem(Material.GREEN_WOOL, ChatColor.GREEN + "Enable all mobs"), 32, () -> {
+      mobsService.getWorlds().get(world).enableAllMobs();
+      setupDisabledMobsSlots(player, gui, world);
+      gui.refillSlots();
+    });
+
+    gui.addClickable(createItem(Material.GRASS_BLOCK, ChatColor.GREEN + "Change world"), 36, () -> {
+      List<String> worlds = mobsService.getWorlds().keySet().stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
+      int indexOf = worlds.indexOf(world) + 1;
+      if (indexOf >= worlds.size()) {
+        indexOf = 0;
+      }
+      createDisabledMobsGUI(player, worlds.get(indexOf)).openInventory(player);
+    });
+    gui.addClickable(createItem(Material.ARROW, ChatColor.BLUE + "Previous"), 38, gui::previousPage);
+    gui.addClickable(createItem(Material.NETHER_STAR, ChatColor.GREEN + "Available Mobs"), 40, () ->
+        createAvailableMobsGUI(player, world).openInventory(player));
+    gui.addClickable(createItem(Material.ARROW, ChatColor.BLUE + "Next"), 42, gui::nextPage);
+    gui.addClickable(createItem(Material.BARRIER, ChatColor.RED + "Close"), 44, player::closeInventory);
+    return gui;
+  }
+
+  private void setupAvailableMobsSlots(final Player player, final GUI gui, final String world) {
     List<Clickable> clickables = new ArrayList<>();
     Mobs mobs = mobsService.getWorlds().get(world);
     for (String mob : mobs.getAvailableMobs()) {
@@ -79,7 +126,33 @@ public class GUIService {
           new SaveMobConfig(plugin, mobsService);
           sendMessage(player, mob + " was successfully added to the list of disabled Mobs!");
         }
-        setupSlots(player, gui, world);
+        setupAvailableMobsSlots(player, gui, world);
+        gui.refillSlots();
+      }));
+    }
+    gui.addClickables(clickables);
+  }
+
+  private void setupDisabledMobsSlots(final Player player, final GUI gui, final String world) {
+    List<Clickable> clickables = new ArrayList<>();
+    Mobs mobs = mobsService.getWorlds().get(world);
+    for (String mob : mobs.getDisabledMobs()) {
+      Material material;
+      try {
+        material = Material.valueOf(mob.toUpperCase() + "_SPAWN_EGG");
+      } catch (IllegalArgumentException e) {
+        material = Material.DIAMOND;
+      }
+      String[] lore = new String[2];
+      lore[0] = ChatColor.RED + "Disabled";
+      lore[1] = "Click to enabled";
+
+      clickables.add(new Clickable(createItem(material, mob, lore), () -> {
+        mobs.removeDisabledMob(mob);
+        new SaveMobConfig(plugin, mobsService);
+        sendMessage(player, mob + " was successfully removed from the list of disabled Mobs!");
+
+        setupDisabledMobsSlots(player, gui, world);
         gui.refillSlots();
       }));
     }
