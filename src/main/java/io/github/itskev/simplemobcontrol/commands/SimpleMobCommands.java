@@ -46,6 +46,10 @@ public class SimpleMobCommands implements CommandExecutor, TabCompleter {
 
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    if (!sender.hasPermission("simplemobcontrol.info")) {
+      return true;
+    }
+
     Player player = null;
     if (sender instanceof Player) {
       player = (Player) sender;
@@ -59,7 +63,7 @@ public class SimpleMobCommands implements CommandExecutor, TabCompleter {
     }
 
     if (args.length == 0) {
-      if (player != null) {
+      if (player != null && sender.hasPermission("simplemobcontrol.configure")) {
         guiService.createAvailableMobsGUI(player, world).openInventory(player);
       } else {
         infoCommands.showHelp(sender);
@@ -76,7 +80,7 @@ public class SimpleMobCommands implements CommandExecutor, TabCompleter {
       return true;
     }
 
-    if (args[0].equalsIgnoreCase("disabledMobs") && sender.hasPermission("simplemobcontrol.info")) {
+    if (args[0].equalsIgnoreCase("disabledMobs")) {
       infoCommands.showDisabledMobs(sender, world);
     } else if (sender.hasPermission("simplemobcontrol.configure")) {
       switch (args[0].toLowerCase()) {

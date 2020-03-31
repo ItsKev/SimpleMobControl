@@ -3,10 +3,10 @@ package io.github.itskev.simplemobcontrol.gui;
 import io.github.itskev.simplemobcontrol.config.Mobs;
 import io.github.itskev.simplemobcontrol.config.MobsService;
 import io.github.itskev.simplemobcontrol.config.SaveMobConfig;
+import io.github.itskev.simplemobcontrol.util.XMaterial;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
@@ -31,22 +31,24 @@ public class GUIService {
   public GUI createAvailableMobsGUI(final Player player, final String world) {
     Inventory inventory = Bukkit.createInventory(null, 45, ChatColor.DARK_GREEN + "SMC - " + world);
     GUIImpl gui = new GUIImpl(inventory, plugin);
-    gui.fillBarWith(createItem(Material.BLACK_STAINED_GLASS_PANE, ChatColor.GOLD + ""));
+    gui.fillBarWith(createItem(XMaterial.BLACK_STAINED_GLASS_PANE.parseItem(), ChatColor.GOLD + ""));
 
     setupAvailableMobsSlots(player, gui, world);
 
-    gui.addClickable(createItem(Material.RED_WOOL, ChatColor.RED + "Disable all mobs"), 30, () -> {
+    gui.addClickable(createItem(XMaterial.RED_WOOL.parseItem(), ChatColor.RED + "Disable all mobs"), 30, () -> {
       mobsService.getWorlds().get(world).disableAllMobs();
+      new SaveMobConfig(plugin, mobsService);
       setupAvailableMobsSlots(player, gui, world);
       gui.refillSlots();
     });
-    gui.addClickable(createItem(Material.GREEN_WOOL, ChatColor.GREEN + "Enable all mobs"), 32, () -> {
+    gui.addClickable(createItem(XMaterial.GREEN_WOOL.parseItem(), ChatColor.GREEN + "Enable all mobs"), 32, () -> {
       mobsService.getWorlds().get(world).enableAllMobs();
+      new SaveMobConfig(plugin, mobsService);
       setupAvailableMobsSlots(player, gui, world);
       gui.refillSlots();
     });
 
-    gui.addClickable(createItem(Material.GRASS_BLOCK, ChatColor.GREEN + "Change world"), 36, () -> {
+    gui.addClickable(createItem(XMaterial.GRASS_BLOCK.parseItem(), ChatColor.GREEN + "Change world"), 36, () -> {
       List<String> worlds = mobsService.getWorlds().keySet().stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
       int indexOf = worlds.indexOf(world) + 1;
       if (indexOf >= worlds.size()) {
@@ -54,33 +56,35 @@ public class GUIService {
       }
       createAvailableMobsGUI(player, worlds.get(indexOf)).openInventory(player);
     });
-    gui.addClickable(createItem(Material.ARROW, ChatColor.BLUE + "Previous"), 38, gui::previousPage);
-    gui.addClickable(createItem(Material.NETHER_STAR, ChatColor.RED + "Disabled Mobs"), 40, () ->
+    gui.addClickable(createItem(XMaterial.ARROW.parseItem(), ChatColor.BLUE + "Previous"), 38, gui::previousPage);
+    gui.addClickable(createItem(XMaterial.NETHER_STAR.parseItem(), ChatColor.RED + "Disabled Mobs"), 40, () ->
         createDisabledMobsGUI(player, world).openInventory(player));
-    gui.addClickable(createItem(Material.ARROW, ChatColor.BLUE + "Next"), 42, gui::nextPage);
-    gui.addClickable(createItem(Material.BARRIER, ChatColor.RED + "Close"), 44, player::closeInventory);
+    gui.addClickable(createItem(XMaterial.ARROW.parseItem(), ChatColor.BLUE + "Next"), 42, gui::nextPage);
+    gui.addClickable(createItem(XMaterial.BARRIER.parseItem(), ChatColor.RED + "Close"), 44, player::closeInventory);
     return gui;
   }
 
   public GUI createDisabledMobsGUI(final Player player, final String world) {
     Inventory inventory = Bukkit.createInventory(null, 45, ChatColor.DARK_GREEN + "Disabled Mobs - " + world);
     GUIImpl gui = new GUIImpl(inventory, plugin);
-    gui.fillBarWith(createItem(Material.BLACK_STAINED_GLASS_PANE, ChatColor.GOLD + ""));
+    gui.fillBarWith(createItem(XMaterial.BLACK_STAINED_GLASS_PANE.parseItem(), ChatColor.GOLD + ""));
 
     setupDisabledMobsSlots(player, gui, world);
 
-    gui.addClickable(createItem(Material.RED_WOOL, ChatColor.RED + "Disable all mobs"), 30, () -> {
+    gui.addClickable(createItem(XMaterial.RED_WOOL.parseItem(), ChatColor.RED + "Disable all mobs"), 30, () -> {
       mobsService.getWorlds().get(world).disableAllMobs();
+      new SaveMobConfig(plugin, mobsService);
       setupDisabledMobsSlots(player, gui, world);
       gui.refillSlots();
     });
-    gui.addClickable(createItem(Material.GREEN_WOOL, ChatColor.GREEN + "Enable all mobs"), 32, () -> {
+    gui.addClickable(createItem(XMaterial.GREEN_WOOL.parseItem(), ChatColor.GREEN + "Enable all mobs"), 32, () -> {
       mobsService.getWorlds().get(world).enableAllMobs();
+      new SaveMobConfig(plugin, mobsService);
       setupDisabledMobsSlots(player, gui, world);
       gui.refillSlots();
     });
 
-    gui.addClickable(createItem(Material.GRASS_BLOCK, ChatColor.GREEN + "Change world"), 36, () -> {
+    gui.addClickable(createItem(XMaterial.GRASS_BLOCK.parseItem(), ChatColor.GREEN + "Change world"), 36, () -> {
       List<String> worlds = mobsService.getWorlds().keySet().stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
       int indexOf = worlds.indexOf(world) + 1;
       if (indexOf >= worlds.size()) {
@@ -88,11 +92,11 @@ public class GUIService {
       }
       createDisabledMobsGUI(player, worlds.get(indexOf)).openInventory(player);
     });
-    gui.addClickable(createItem(Material.ARROW, ChatColor.BLUE + "Previous"), 38, gui::previousPage);
-    gui.addClickable(createItem(Material.NETHER_STAR, ChatColor.GREEN + "Available Mobs"), 40, () ->
+    gui.addClickable(createItem(XMaterial.ARROW.parseItem(), ChatColor.BLUE + "Previous"), 38, gui::previousPage);
+    gui.addClickable(createItem(XMaterial.NETHER_STAR.parseItem(), ChatColor.GREEN + "Available Mobs"), 40, () ->
         createAvailableMobsGUI(player, world).openInventory(player));
-    gui.addClickable(createItem(Material.ARROW, ChatColor.BLUE + "Next"), 42, gui::nextPage);
-    gui.addClickable(createItem(Material.BARRIER, ChatColor.RED + "Close"), 44, player::closeInventory);
+    gui.addClickable(createItem(XMaterial.ARROW.parseItem(), ChatColor.BLUE + "Next"), 42, gui::nextPage);
+    gui.addClickable(createItem(XMaterial.BARRIER.parseItem(), ChatColor.RED + "Close"), 44, player::closeInventory);
     return gui;
   }
 
@@ -100,11 +104,11 @@ public class GUIService {
     List<Clickable> clickables = new ArrayList<>();
     Mobs mobs = mobsService.getWorlds().get(world);
     for (String mob : mobs.getAvailableMobs()) {
-      Material material;
+      ItemStack itemStack;
       try {
-        material = Material.valueOf(mob.toUpperCase() + "_SPAWN_EGG");
+        itemStack = XMaterial.valueOf(mob.toUpperCase() + "_SPAWN_EGG").parseItem();
       } catch (IllegalArgumentException e) {
-        material = Material.DIAMOND;
+        itemStack = XMaterial.DIAMOND.parseItem();
       }
       String[] lore = new String[2];
       boolean isDisabled = mobs.getDisabledMobs().contains(mob);
@@ -116,7 +120,7 @@ public class GUIService {
         lore[1] = "Click to disable";
       }
 
-      clickables.add(new Clickable(createItem(material, mob, lore), () -> {
+      clickables.add(new Clickable(createItem(itemStack, mob, lore), () -> {
         if (isDisabled) {
           mobs.removeDisabledMob(mob);
           new SaveMobConfig(plugin, mobsService);
@@ -137,17 +141,17 @@ public class GUIService {
     List<Clickable> clickables = new ArrayList<>();
     Mobs mobs = mobsService.getWorlds().get(world);
     for (String mob : mobs.getDisabledMobs()) {
-      Material material;
+      ItemStack itemStack;
       try {
-        material = Material.valueOf(mob.toUpperCase() + "_SPAWN_EGG");
+        itemStack = XMaterial.valueOf(mob.toUpperCase() + "_SPAWN_EGG").parseItem();
       } catch (IllegalArgumentException e) {
-        material = Material.DIAMOND;
+        itemStack = XMaterial.DIAMOND.parseItem();
       }
       String[] lore = new String[2];
       lore[0] = ChatColor.RED + "Disabled";
       lore[1] = "Click to enabled";
 
-      clickables.add(new Clickable(createItem(material, mob, lore), () -> {
+      clickables.add(new Clickable(createItem(itemStack, mob, lore), () -> {
         mobs.removeDisabledMob(mob);
         new SaveMobConfig(plugin, mobsService);
         sendMessage(player, mob + " was successfully removed from the list of disabled Mobs!");
@@ -157,10 +161,6 @@ public class GUIService {
       }));
     }
     gui.addClickables(clickables);
-  }
-
-  private ItemStack createItem(Material material, String displayName, String... lore) {
-    return createItem(new ItemStack(material), displayName, lore);
   }
 
   private ItemStack createItem(ItemStack itemStack, String displayName, String... lore) {
